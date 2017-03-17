@@ -1,6 +1,7 @@
 package com.igor2i.students.modules.pojo.university;
 
 
+import com.igor2i.students.modules.pojo.university.interfaces.IStudentsMaper;
 import com.igor2i.students.modules.pojo.university.objects.Student;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,7 +14,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by igor2i on 16.02.17.
@@ -36,7 +36,6 @@ public class Students implements WorkWithDB<Student> {
         while (resultSet.next()) {
             groupArrayList.add(new Student(resultSet.getInt("id"),
                     resultSet.getString("firstName"),
-                    resultSet.getString("lastName"),
                     resultSet.getDate("dob"),
                     resultSet.getInt("male"),
                     resultSet.getInt("idGroup")
@@ -48,11 +47,11 @@ public class Students implements WorkWithDB<Student> {
     @Override
     public Student getById(int id) throws SQLException {
         SqlSessionFactory sqlSessionFactory;
-        StudentsMaper studentsMaper;
+        IStudentsMaper studentsMaper;
         Student student = null;
         try(Reader reader = Resources.getResourceAsReader("META-INF/mybatis-config.xml")) {
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            studentsMaper = sqlSessionFactory.openSession().getMapper(StudentsMaper.class);
+            studentsMaper = sqlSessionFactory.openSession().getMapper(IStudentsMaper.class);
             student = studentsMaper.getStudentById(id);
         }
         catch (IOException e) {
@@ -75,7 +74,6 @@ public class Students implements WorkWithDB<Student> {
         while (resultSet.next()) {
             group = new Student(resultSet.getInt("id"),
                     resultSet.getString("firstName"),
-                    resultSet.getString("lastName"),
                     resultSet.getDate("dob"),
                     resultSet.getInt("male"),
                     resultSet.getInt("idGroup")
@@ -90,13 +88,15 @@ public class Students implements WorkWithDB<Student> {
         String query = "INSERT INTO " + tableName + " (`firstName`, `lastName`, `dob`, `male`, `idGroup`) " +
                 "VALUES ( ?, ?, ?, ?, ?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, student.getFirstName());
-        preparedStatement.setString(2, student.getLastName());
-        preparedStatement.setDate(3, new Date(student.getDob().getTime()));
-        preparedStatement.setString(4, String.valueOf(student.getMale()));
-        preparedStatement.setString(5, String.valueOf(student.getIdGroup()));
+        throw new UnsupportedOperationException();
 
-        preparedStatement.execute();
+//        preparedStatement.setString(1, student.getFirstName());
+//        preparedStatement.setString(2, student.getLastName());
+//        preparedStatement.setDate(3, new Date(student.getDob().getTime()));
+//        preparedStatement.setString(4, String.valueOf(student.getMale()));
+//        preparedStatement.setString(5, String.valueOf(student.getIdGroup()));
+//
+//        preparedStatement.execute();
     }
 
     @Override
@@ -105,15 +105,16 @@ public class Students implements WorkWithDB<Student> {
         String query = "UPDATE " + tableName + " SET `firstName`=?,`lastName`=?,`dob`=?,`male` = ?,`idGroup`= ?" +
                 " WHERE `id` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, student.getFirstName());
-        preparedStatement.setString(2, student.getLastName());
-        preparedStatement.setString(3, String.valueOf(student.getDob()));
-        preparedStatement.setString(4, String.valueOf(student.getMale()));
-        preparedStatement.setString(5, String.valueOf(student.getIdGroup()));
-
-        preparedStatement.setString(6, String.valueOf(id));
-
-        preparedStatement.execute();
+        throw new UnsupportedOperationException();
+//        preparedStatement.setString(1, student.getFirstName());
+//        preparedStatement.setString(2, student.getLastName());
+//        preparedStatement.setString(3, String.valueOf(student.getDob()));
+//        preparedStatement.setString(4, String.valueOf(student.getMale()));
+//        preparedStatement.setString(5, String.valueOf(student.getIdGroup()));
+//
+//        preparedStatement.setString(6, String.valueOf(id));
+//
+//        preparedStatement.execute();
     }
 
     public void delById(int id) throws SQLException {

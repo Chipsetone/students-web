@@ -7,21 +7,16 @@ import java.util.Date;
  */
 public class Student {
     private int id;
-    @Deprecated
-    private String firstName;
-    @Deprecated
-    private String lastName;
-    private Date dob;
-    private int male;
+    private Date birthdate;
+    private char sex;
     private int idGroup;
     private String name;
 
-    public Student(int id, String firstName, String lastName, Date dob, int male, int idGroup) {
+    public Student(int id, String firstName, Date dob, int male, int idGroup) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.male = male;
+        this.name = firstName;
+        this.birthdate = dob;
+        this.sex = (char)male;
         this.idGroup = idGroup;
     }
 
@@ -32,40 +27,24 @@ public class Student {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public char getSex() {
+        return sex;
     }
 
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public int getMale() {
-        return male;
-    }
-
-    public void setMale(int male) {
-        this.male = male;
+    public void setSex(char sex) {
+        this.sex = sex;
     }
 
     public int getIdGroup() {
@@ -82,17 +61,5 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dob=" + dob +
-                ", male=" + male +
-                ", idGroup=" + idGroup +
-                '}';
     }
 }

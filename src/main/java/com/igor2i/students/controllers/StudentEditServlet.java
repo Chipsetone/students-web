@@ -44,10 +44,9 @@ public class StudentEditServlet extends HttpServlet {
 
         Student student = new Student();
 
-        student.setFirstName(req.getParameter("firstName"));
-        student.setLastName(req.getParameter("lastName"));
-        student.setDob(new Date(1999,01,02));
-        student.setMale(new Integer(req.getParameter("male")));
+        student.setName(req.getParameter("firstName"));
+        student.setBirthdate(new Date(1999,01,02));
+        student.setSex(((char) new Integer(req.getParameter("male")).intValue()));
         student.setIdGroup(new Integer(req.getParameter("idGroup")));
 
         LOGGER.debug(student.toString());
