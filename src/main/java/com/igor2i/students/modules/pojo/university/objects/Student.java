@@ -7,11 +7,14 @@ import java.util.Date;
  */
 public class Student {
     private int id;
+    @Deprecated
     private String firstName;
+    @Deprecated
     private String lastName;
     private Date dob;
     private int male;
     private int idGroup;
+    private String name;
 
     public Student(int id, String firstName, String lastName, Date dob, int male, int idGroup) {
         this.id = id;
@@ -71,6 +74,14 @@ public class Student {
 
     public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

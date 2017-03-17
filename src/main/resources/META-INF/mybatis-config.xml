@@ -14,6 +14,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="students-maper.xml"/>
+        <mapper resource="META-INF/students-maper.xml"/>
     </mappers>
 </configuration>

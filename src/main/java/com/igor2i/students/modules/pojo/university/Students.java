@@ -49,13 +49,11 @@ public class Students implements WorkWithDB<Student> {
     public Student getById(int id) throws SQLException {
         SqlSessionFactory sqlSessionFactory;
         StudentsMaper studentsMaper;
-        Reader reader = null;
         Student student = null;
-        try {
-            reader = Resources.getResourceAsReader("mybatis-config.xml");
+        try(Reader reader = Resources.getResourceAsReader("META-INF/mybatis-config.xml")) {
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
             studentsMaper = sqlSessionFactory.openSession().getMapper(StudentsMaper.class);
-            student = studentsMaper.getStudentById(101);
+            student = studentsMaper.getStudentById(id);
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -12,6 +12,7 @@ public class StudentsMyBatisTest {
         Student student = students.getById(9);
 
         assertNotNull(student);
+        assertEquals("name2", student.getName());
     }
 
 }
