@@ -2,20 +2,12 @@ package com.igor2i.students.modules.pojo.university.objects;
 
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
 
 @Component
-@Entity
-@Table(name="user", schema = "public")
 public class User {
-  @Id
-  @GeneratedValue
   private Long id;
-  @Column(name = "login")
   private String login;
-  @Column(name = "password")
   private String passwd;
-  @Column(name = "enabled")
   private int enabled;
 
   public User() {

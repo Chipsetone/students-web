@@ -28,5 +28,5 @@ dependencies {
     compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.2.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '4.2.2.RELEASE'
 
-    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.8.Final'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.2.2'
 }

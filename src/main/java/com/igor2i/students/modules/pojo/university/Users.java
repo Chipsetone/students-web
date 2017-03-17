@@ -5,12 +5,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +17,6 @@ public class Users implements WorkWithDB<User> {
     private static final Logger logger = LogManager.getLogger(Users.class);
 
     private static final String tableName = "students.public.user";
-    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("STUDENTS");
 
 
     @Override
@@ -58,20 +51,21 @@ public class Users implements WorkWithDB<User> {
 
     @Override
     public User getByName(String login) throws SQLException {
-        EntityManager em = FACTORY.createEntityManager();
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
-        Root<User> root = criteriaQuery.from(User.class);
-        criteriaQuery.select(root);
-        criteriaQuery.where(
-                criteriaBuilder.and(
-                        criteriaBuilder.equal(root.get("login"), login)
-                )
-        );
-
-        List<User> users = em.createQuery(criteriaQuery).getResultList();
-
-        return users.get(0);
+//        EntityManager em = FACTORY.createEntityManager();
+//        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+//        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+//        Root<User> root = criteriaQuery.from(User.class);
+//        criteriaQuery.select(root);
+//        criteriaQuery.where(
+//                criteriaBuilder.and(
+//                        criteriaBuilder.equal(root.get("login"), login)
+//                )
+//        );
+//
+//        List<User> users = em.createQuery(criteriaQuery).getResultList();
+//
+//        return users.get(0);
+        return null;
     }
 
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException {

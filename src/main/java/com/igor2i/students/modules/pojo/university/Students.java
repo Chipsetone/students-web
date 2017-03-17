@@ -2,16 +2,25 @@ package com.igor2i.students.modules.pojo.university;
 
 
 import com.igor2i.students.modules.pojo.university.objects.Student;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by igor2i on 16.02.17.
  */
 @Component
 public class Students implements WorkWithDB<Student> {
+    private static final Logger logger = LogManager.getLogger(Students.class);
 
     private static final String tableName = "students";
 
@@ -38,23 +47,18 @@ public class Students implements WorkWithDB<Student> {
 
     @Override
     public Student getById(int id) throws SQLException {
-        Connection connection = ConnectionsMyDB.getDbCon().connection;
-
-        String query = "SELECT * FROM " + tableName + " WHERE `id` = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, String.valueOf(id));
-
-        ResultSet resultSet = preparedStatement.executeQuery();
+        SqlSessionFactory sqlSessionFactory;
+        StudentsMaper studentsMaper;
+        Reader reader = null;
         Student student = null;
-
-        while (resultSet.next()) {
-            student = new Student(resultSet.getInt("id"),
-                    resultSet.getString("firstName"),
-                    resultSet.getString("lastName"),
-                    resultSet.getDate("dob"),
-                    resultSet.getInt("male"),
-                    resultSet.getInt("idGroup")
-            );
+        try {
+            reader = Resources.getResourceAsReader("mybatis-config.xml");
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+            studentsMaper = sqlSessionFactory.openSession().getMapper(StudentsMaper.class);
+            student = studentsMaper.getStudentById(101);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
         return student;
     }

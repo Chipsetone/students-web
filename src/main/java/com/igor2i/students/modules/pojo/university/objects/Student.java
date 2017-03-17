@@ -1,26 +1,16 @@
 package com.igor2i.students.modules.pojo.university.objects;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by igor2i on 16.02.17.
  */
-@Entity
-@Table(name = "student", schema = "students")
 public class Student {
-    @Id
-    @GeneratedValue
     private int id;
-    @Column
     private String firstName;
-    @Column
     private String lastName;
-    @Column(name = "birthdate")
     private Date dob;
-    @Column
     private int male;
-    @Column
     private int idGroup;
 
     public Student(int id, String firstName, String lastName, Date dob, int male, int idGroup) {
