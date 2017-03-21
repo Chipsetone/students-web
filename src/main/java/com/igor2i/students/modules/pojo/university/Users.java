@@ -1,8 +1,10 @@
 package com.igor2i.students.modules.pojo.university;
 
 import com.igor2i.students.modules.pojo.university.objects.User;
+import com.igor2i.students.modules.pojo.university.springdata.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -25,6 +27,8 @@ public class Users implements WorkWithDB<User> {
     private static final String tableName = "students.public.user";
     private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("STUDENTS");
 
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public ArrayList<User> getAll() throws SQLException {
@@ -41,19 +45,10 @@ public class Users implements WorkWithDB<User> {
     }
 
     @Override
-    public User getById(int id) throws SQLException {
-        Connection connection = ConnectionsMyDB.getDbCon().connection;
-
-        String query = "SELECT * FROM " + tableName + " WHERE id = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, String.valueOf(id));
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            return getUserFromResultSet(resultSet);
-        }
-        return null;
+    public User getById(int id){
+        User user = userRepository.findOne(new Long(id));
+        logger.trace("getById(" + id + ") result: " + user);
+        return user;
     }
 
     @Override

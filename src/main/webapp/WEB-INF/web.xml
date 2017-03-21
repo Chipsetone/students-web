@@ -8,6 +8,7 @@
         <param-value>
             /WEB-INF/dispatcher-servlet.xml
             /WEB-INF/application-security.xml
+            /WEB-INF/spring-context.xml
         </param-value>
     </context-param>
 
