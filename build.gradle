@@ -17,7 +17,6 @@ dependencies {
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
     compile 'jstl:jstl:1.2'
 
-//    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.+'
 
     compile group: 'org.springframework', name: 'spring-context', version: '4.3.5.RELEASE'
@@ -29,4 +28,11 @@ dependencies {
     compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '4.2.2.RELEASE'
 
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.8.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.8.Final'
+
+    compile group: 'org.springframework', name: 'spring-aspects', version: '4.3.5.RELEASE'
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.9.6.RELEASE'
+    compile group: 'joda-time', name: 'joda-time', version: '2.7'
+    compile group: 'joda-time', name: 'joda-time-hibernate', version: '1.3'
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
 }
