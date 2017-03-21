@@ -20,9 +20,9 @@ public class CustomUserDetailService implements UserDetailsService {
     private static final Logger logger = LogManager.getLogger(CustomUserDetailService.class);
 
     @Autowired
-    private Users userDao = new Users();
+    private Users userDao;
     @Autowired
-    private UserRoleDao userRoleDao = new UserRoleDao();
+    private UserRoleDao userRoleDao;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

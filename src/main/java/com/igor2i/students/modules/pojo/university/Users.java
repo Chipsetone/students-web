@@ -3,7 +3,7 @@ package com.igor2i.students.modules.pojo.university;
 import com.igor2i.students.modules.pojo.university.objects.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by igor2i on 23.02.17.
  */
-@Component
+@Repository
 public class Users implements WorkWithDB<User> {
     private static final Logger logger = LogManager.getLogger(Users.class);
 

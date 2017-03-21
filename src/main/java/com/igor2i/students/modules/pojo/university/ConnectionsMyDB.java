@@ -11,13 +11,10 @@ import java.sql.DriverManager;
  * Created by igor2i on 16.02.17.
  */
 final class ConnectionsMyDB {
-
     private static final Logger logger = LogManager.getLogger(ConnectionsMyDB.class);
 
     protected Connection connection;
     protected static ConnectionsMyDB db;
-
-
 
     private static String url;
     private static String login;
@@ -39,6 +36,7 @@ final class ConnectionsMyDB {
 
 
     protected static synchronized ConnectionsMyDB getDbCon() {
+
         if ( db == null ) {
             db = new ConnectionsMyDB();
             logger.trace(db.connection);
@@ -47,36 +45,15 @@ final class ConnectionsMyDB {
                     Thread.currentThread().getStackTrace()) {
                 logger.trace(el);
             }
-
         }
         return db;
 
     }
 
     private static void config() throws IOException {
-
-
-        /**
-         * <entry key="jdbc.url">jdbc:mysql://localhost/university</entry>
-             <entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
-             <entry key="jdbc.username">user</entry>
-             <entry key="jdbc.password">Qwer-1234</entry>
-         */
-//        Properties props = new Properties();
-//        FileInputStream fis = new FileInputStream("JDBCConfig.xml");
-//
-//        props.loadFromXML(fis);
-
-//        url = props.getProperty("jdbc.url");
-//        driver = props.getProperty("jdbc.driver");
-//        login = props.getProperty("jdbc.username");
-//        passwd = props.getProperty("jdbc.password");
         url = "jdbc:postgresql://localhost:5432/students";
         driver = "org.postgresql.Driver";
         login = "postgres";
-        passwd = "admin";
-
+        passwd = "42";
     }
-
-
 }
