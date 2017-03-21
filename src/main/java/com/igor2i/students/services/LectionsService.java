@@ -2,6 +2,7 @@ package com.igor2i.students.services;
 
 import com.igor2i.students.modules.pojo.university.Lections;
 import com.igor2i.students.modules.pojo.university.objects.Lection;
+import com.igor2i.students.modules.pojo.university.springdata.LectionRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,27 +16,25 @@ import java.util.ArrayList;
  */
 @Service
 public class LectionsService {
-
-    private static final Logger LOGGER = LogManager.getLogger(LectionsService.class);
+    private static final Logger logger = LogManager.getLogger(LectionsService.class);
 
     @Autowired
     private Lections lections;
+    @Autowired
+    private LectionRepository lectionRepository;
 
     public  ArrayList<Lection> getAllLections(){
-
-
-        ArrayList<Lection> lectionArrayList = new ArrayList<>(20);
-
+        ArrayList<Lection> result = new ArrayList<>(10);
         try {
-            lectionArrayList.addAll(lections.getAll());
-
-
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-            e.getStackTrace();
+            Iterable<Lection> lections = lectionRepository.findAll();
+            for (Lection lec :
+                    lections) {
+                result.add(lec);
+            }
+        } catch (Exception e) {
+            logger.error("Что-то хреновое при попытке получить все лекции", e);
         }
-
-        return lectionArrayList;
+        return result;
 
     }
 
@@ -46,7 +45,7 @@ public class LectionsService {
             lection = lections.getById(id);
 
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
+            logger.error(e.getMessage());
 //            e.printStackTrace();
         }
         return lection;
@@ -57,7 +56,7 @@ public class LectionsService {
         try {
             lections.setUpdateById(id,lection);
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
+            logger.error(e.getMessage());
 //            e.printStackTrace();
         }
     }
@@ -66,7 +65,7 @@ public class LectionsService {
         try {
             lections.setNewColumn(lection);
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
+            logger.error(e.getMessage());
 //            e.printStackTrace();
         }
     }
@@ -77,7 +76,7 @@ public class LectionsService {
             lections.delById(id);
 
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
+            logger.error(e.getMessage());
 //            e.printStackTrace();
         }
 

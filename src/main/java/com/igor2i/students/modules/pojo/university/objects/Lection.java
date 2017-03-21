@@ -1,18 +1,29 @@
 package com.igor2i.students.modules.pojo.university.objects;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
  * Created by igor2i on 16.02.17.
  */
+@Entity
+@Table(name="lection", schema="public")
 public class Lection {
 
+    @Id
+    @GeneratedValue
     private int id;
+    @Column(name = "name")
     private String name;
+//    @Column(name = "subject")
     private String text;
+    @Column(name = "subject")
     private String subject;
+    @Column(name = "date")
     private Timestamp dateTime;
 
+    @Column(name= "groupid")
+    private int group_id;
 
     public Lection() {
     }
@@ -66,6 +77,14 @@ public class Lection {
 
     public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public int getGroup_id() {
+        return group_id;
+    }
+
+    public void setGroup_id(int group_id) {
+        this.group_id = group_id;
     }
 
     @Override
