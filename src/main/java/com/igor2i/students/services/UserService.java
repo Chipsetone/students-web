@@ -27,27 +27,17 @@ public class UserService {
     private int count = 0;
 
     public boolean authorize(String login, String pass){
-        try {
-
-            User user = users.getByName(login);
-            if(user != null) {
-                if (login.equals(user.getLogin()) && pass.equals(user.getPasswd())) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }else {
+        User user = users.getByName(login);
+        if(user != null) {
+            if (login.equals(user.getLogin()) && pass.equals(user.getPasswd())) {
+                return true;
+            } else {
                 return false;
             }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }else {
+            return false;
         }
-        return false;
-
     }
-
 
     public boolean createUser(String login, String pass){
 

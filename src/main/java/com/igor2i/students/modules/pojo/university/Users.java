@@ -57,7 +57,24 @@ public class Users implements WorkWithDB<User> {
     }
 
     @Override
-    public User getByName(String login) throws SQLException {
+    public User getByName(String login) {
+        EntityManager em = FACTORY.createEntityManager();
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(
+                criteriaBuilder.and(
+                        criteriaBuilder.equal(root.get("login"), login)
+                )
+        );
+
+        List<User> users = em.createQuery(criteriaQuery).getResultList();
+
+        return users.get(0);
+    }
+
+    public User getByNameSpringData(String login) {
         EntityManager em = FACTORY.createEntityManager();
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
